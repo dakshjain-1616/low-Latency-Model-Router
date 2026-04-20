@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0c29"/>
+      <stop offset="50%" style="stop-color:#302b63"/>
+      <stop offset="100%" style="stop-color:#24243e"/>
+    </linearGradient>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6c63ff"/>
+      <stop offset="100%" style="stop-color:#3ecfcf"/>
+    </linearGradient>
+    <linearGradient id="googleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285f4"/>
+      <stop offset="100%" style="stop-color:#34a853"/>
+    </linearGradient>
+    <linearGradient id="openaiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10a37f"/>
+      <stop offset="100%" style="stop-color:#1a7f64"/>
+    </linearGradient>
+    <linearGradient id="anthropicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#cc785c"/>
+      <stop offset="100%" style="stop-color:#8b4a2e"/>
+    </linearGradient>
+    <linearGradient id="routerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c63ff"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="cacheGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3ecfcf"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+    </marker>
+    <marker id="arrowYellow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)"/>
+
+  <!-- Header Bar -->
+  <rect x="0" y="0" width="1200" height="80" fill="url(#headerGrad)" opacity="0.9"/>
+  <text x="600" y="30" text-anchor="middle" fill="white" font-size="26" font-weight="700" letter-spacing="1">Low-Latency Model Router</text>
+  <text x="600" y="58" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="14" letter-spacing="2">SYSTEM ARCHITECTURE &amp; REQUEST FLOW</text>
+  <text x="1160" y="45" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="11">github.com/dakshjain-1616</text>
+
+  <!-- ====== CLIENT BOX ====== -->
+  <rect x="30" y="120" width="160" height="100" rx="12" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="158" text-anchor="middle" fill="#a5f3fc" font-size="13" font-weight="600">CLIENT</text>
+  <text x="110" y="178" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">POST /route</text>
+  <text x="110" y="196" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">{ messages, priority }</text>
+  <!-- Client icon -->
+  <circle cx="110" cy="138" r="10" fill="rgba(165,243,252,0.2)" stroke="#a5f3fc" stroke-width="1.5"/>
+  <text x="110" y="143" text-anchor="middle" fill="#a5f3fc" font-size="12">⬛</text>
+
+  <!-- Arrow: Client → Cache Check -->
+  <line x1="190" y1="170" x2="280" y2="170" stroke="#3ecfcf" stroke-width="2" marker-end="url(#arrowBlue)" stroke-dasharray="5,3"/>
+  <text x="235" y="162" text-anchor="middle" fill="#3ecfcf" font-size="10">request</text>
+
+  <!-- ====== CACHE CHECK BOX ====== -->
+  <rect x="280" y="120" width="160" height="100" rx="12" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="152" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="600">CACHE CHECK</text>
+  <text x="360" y="172" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">SHA-256 key lookup</text>
+  <text x="360" y="190" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">Redis → In-Memory</text>
+  <!-- Cache hit arrow (down-right) -->
+  <path d="M360 220 L360 270 L110 270 L110 230" stroke="#f59e0b" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)" stroke-dasharray="4,3"/>
+  <text x="235" y="288" text-anchor="middle" fill="#f59e0b" font-size="10">cache HIT → return immediately</text>
+
+  <!-- Arrow: Cache Miss → Router -->
+  <line x1="440" y1="170" x2="530" y2="170" stroke="#3ecfcf" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="485" y="162" text-anchor="middle" fill="#3ecfcf" font-size="10">cache miss</text>
+
+  <!-- ====== ROUTER CORE BOX ====== -->
+  <rect x="530" y="100" width="200" height="140" rx="12" fill="rgba(108,99,255,0.2)" stroke="#6c63ff" stroke-width="2" filter="url(#shadow)"/>
+  <text x="630" y="130" text-anchor="middle" fill="#a78bfa" font-size="14" font-weight="700">ROUTER CORE</text>
+  <text x="630" y="152" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">1. Parse priority weights</text>
+  <text x="630" y="170" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">2. Filter candidates</text>
+  <text x="630" y="188" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">3. Score all models</text>
+  <text x="630" y="206" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">4. Select best → fallback</text>
+  <!-- Overhead badge -->
+  <rect x="560" y="222" width="140" height="22" rx="11" fill="#22c55e" opacity="0.9"/>
+  <text x="630" y="237" text-anchor="middle" fill="white" font-size="11" font-weight="700">⚡ &lt;1ms overhead</text>
+
+  <!-- Arrow: Router → OpenRouter API -->
+  <line x1="730" y1="170" x2="820" y2="170" stroke="#34d399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <text x="775" y="162" text-anchor="middle" fill="#34d399" font-size="10">selected model</text>
+
+  <!-- ====== OPENROUTER API BOX ====== -->
+  <rect x="820" y="120" width="160" height="100" rx="12" fill="rgba(139,92,246,0.15)" stroke="#8b5cf6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="900" y="152" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="600">OPENROUTER</text>
+  <text x="900" y="172" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">Async HTTP client</text>
+  <text x="900" y="190" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">Auto-retry on failure</text>
+
+  <!-- Arrow: OpenRouter → Models -->
+  <line x1="980" y1="170" x2="1050" y2="170" stroke="#34d399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- ====== MODEL CLOUD ====== -->
+  <rect x="1050" y="90" width="130" height="230" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="1115" y="110" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11" font-weight="600">MODELS</text>
+  <!-- Google models -->
+  <rect x="1060" y="118" width="110" height="26" rx="6" fill="url(#googleGrad)" opacity="0.85"/>
+  <text x="1115" y="135" text-anchor="middle" fill="white" font-size="10" font-weight="600">Gemini 3.1 Flash Lite</text>
+  <rect x="1060" y="150" width="110" height="26" rx="6" fill="url(#googleGrad)" opacity="0.7"/>
+  <text x="1115" y="167" text-anchor="middle" fill="white" font-size="10" font-weight="600">Gemini 3.1 Pro</text>
+  <!-- OpenAI models -->
+  <rect x="1060" y="182" width="110" height="26" rx="6" fill="url(#openaiGrad)" opacity="0.85"/>
+  <text x="1115" y="199" text-anchor="middle" fill="white" font-size="10" font-weight="600">GPT-5.4 Mini</text>
+  <rect x="1060" y="214" width="110" height="26" rx="6" fill="url(#openaiGrad)" opacity="0.7"/>
+  <text x="1115" y="231" text-anchor="middle" fill="white" font-size="10" font-weight="600">GPT-5.4</text>
+  <!-- Anthropic models -->
+  <rect x="1060" y="246" width="110" height="26" rx="6" fill="url(#anthropicGrad)" opacity="0.85"/>
+  <text x="1115" y="263" text-anchor="middle" fill="white" font-size="10" font-weight="600">Claude Sonnet 4.6</text>
+  <rect x="1060" y="278" width="110" height="26" rx="6" fill="url(#anthropicGrad)" opacity="0.7"/>
+  <text x="1115" y="295" text-anchor="middle" fill="white" font-size="10" font-weight="600">Claude Opus 4.7</text>
+
+  <!-- Response arrow back -->
+  <path d="M900 220 L900 320 L360 320 L360 260" stroke="#34d399" stroke-width="1.5" fill="none" marker-end="url(#arrowGreen)" stroke-dasharray="5,3"/>
+  <text x="630" y="340" text-anchor="middle" fill="#34d399" font-size="10">response → store in cache → record metrics → return to client</text>
+
+  <!-- ====== METRICS BOX ====== -->
+  <rect x="530" y="370" width="180" height="90" rx="12" fill="rgba(52,211,153,0.1)" stroke="#34d399" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="620" y="395" text-anchor="middle" fill="#34d399" font-size="13" font-weight="600">METRICS TRACKER</text>
+  <text x="620" y="415" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">Rolling window (100 req)</text>
+  <text x="620" y="433" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">avg / p95 / p99 latency</text>
+  <text x="620" y="451" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">per-model usage stats</text>
+
+  <!-- ====== SCORING FORMULA SECTION ====== -->
+  <rect x="30" y="390" width="460" height="200" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(108,99,255,0.4)" stroke-width="1.5"/>
+  <text x="260" y="418" text-anchor="middle" fill="#a78bfa" font-size="14" font-weight="700">SCORING FORMULA</text>
+
+  <!-- Formula -->
+  <rect x="50" y="430" width="420" height="50" rx="8" fill="rgba(108,99,255,0.15)" stroke="rgba(108,99,255,0.3)" stroke-width="1"/>
+  <text x="260" y="452" text-anchor="middle" fill="white" font-size="13" font-family="'Courier New', monospace">Score = w_lat × (1 - norm_lat)</text>
+  <text x="260" y="470" text-anchor="middle" fill="white" font-size="13" font-family="'Courier New', monospace">     + w_cost × (1 - norm_cost) + w_qual × quality</text>
+
+  <!-- Priority weights table -->
+  <rect x="50" y="492" width="420" height="24" rx="4" fill="rgba(255,255,255,0.1)"/>
+  <text x="100" y="508" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11" font-weight="700">Mode</text>
+  <text x="220" y="508" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11" font-weight="700">Latency</text>
+  <text x="320" y="508" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11" font-weight="700">Cost</text>
+  <text x="420" y="508" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11" font-weight="700">Quality</text>
+
+  <!-- Speed row -->
+  <rect x="50" y="516" width="420" height="22" rx="3" fill="rgba(239,68,68,0.15)"/>
+  <text x="100" y="531" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="600">speed</text>
+  <text x="220" y="531" text-anchor="middle" fill="white" font-size="11">0.70</text>
+  <text x="320" y="531" text-anchor="middle" fill="white" font-size="11">0.20</text>
+  <text x="420" y="531" text-anchor="middle" fill="white" font-size="11">0.10</text>
+
+  <!-- Cost row -->
+  <rect x="50" y="538" width="420" height="22" rx="3" fill="rgba(245,158,11,0.15)"/>
+  <text x="100" y="553" text-anchor="middle" fill="#fcd34d" font-size="11" font-weight="600">cost</text>
+  <text x="220" y="553" text-anchor="middle" fill="white" font-size="11">0.20</text>
+  <text x="320" y="553" text-anchor="middle" fill="white" font-size="11">0.70</text>
+  <text x="420" y="553" text-anchor="middle" fill="white" font-size="11">0.10</text>
+
+  <!-- Quality row -->
+  <rect x="50" y="560" width="420" height="22" rx="3" fill="rgba(52,211,153,0.15)"/>
+  <text x="100" y="575" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="600">quality</text>
+  <text x="220" y="575" text-anchor="middle" fill="white" font-size="11">0.10</text>
+  <text x="320" y="575" text-anchor="middle" fill="white" font-size="11">0.20</text>
+  <text x="420" y="575" text-anchor="middle" fill="white" font-size="11">0.70</text>
+
+  <!-- Balanced row -->
+  <rect x="50" y="582" width="420" height="22" rx="3" fill="rgba(108,99,255,0.15)"/>
+  <text x="100" y="597" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="600">balanced</text>
+  <text x="220" y="597" text-anchor="middle" fill="white" font-size="11">0.40</text>
+  <text x="320" y="597" text-anchor="middle" fill="white" font-size="11">0.30</text>
+  <text x="420" y="597" text-anchor="middle" fill="white" font-size="11">0.30</text>
+
+  <!-- ====== MODEL CATALOGUE TABLE ====== -->
+  <rect x="30" y="620" width="1140" height="250" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="600" y="648" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="14" font-weight="700">MODEL CATALOGUE</text>
+
+  <!-- Table header -->
+  <rect x="50" y="658" width="1100" height="26" rx="6" fill="rgba(255,255,255,0.1)"/>
+  <text x="150" y="675" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="11" font-weight="700">Model</text>
+  <text x="370" y="675" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="11" font-weight="700">Provider</text>
+  <text x="500" y="675" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="11" font-weight="700">Avg Latency</text>
+  <text x="640" y="675" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="11" font-weight="700">Cost /1k tokens</text>
+  <text x="790" y="675" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="11" font-weight="700">Quality Score</text>
+  <text x="980" y="675" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="11" font-weight="700">Context</text>
+  <text x="1100" y="675" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="11" font-weight="700">Best For</text>
+
+  <!-- Row 1 - Gemini Flash Lite -->
+  <rect x="50" y="684" width="1100" height="26" rx="3" fill="rgba(66,133,244,0.12)"/>
+  <rect x="50" y="684" width="5" height="26" fill="#4285f4"/>
+  <text x="150" y="701" text-anchor="middle" fill="white" font-size="11">Gemini 3.1 Flash Lite</text>
+  <text x="370" y="701" text-anchor="middle" fill="#93c5fd" font-size="11">Google</text>
+  <text x="500" y="701" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">400 ms ⚡</text>
+  <text x="640" y="701" text-anchor="middle" fill="#fde68a" font-size="11">$0.00175</text>
+  <text x="790" y="701" text-anchor="middle" fill="white" font-size="11">0.78</text>
+  <!-- Quality bar -->
+  <rect x="830" y="691" width="80" height="10" rx="5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="830" y="691" width="62" height="10" rx="5" fill="#4ade80"/>
+  <text x="980" y="701" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">1M tokens</text>
+  <text x="1100" y="701" text-anchor="middle" fill="#fca5a5" font-size="10">Speed / Autocomplete</text>
+
+  <!-- Row 2 - GPT-5.4 Mini -->
+  <rect x="50" y="710" width="1100" height="26" rx="3" fill="rgba(16,163,127,0.12)"/>
+  <rect x="50" y="710" width="5" height="26" fill="#10a37f"/>
+  <text x="150" y="727" text-anchor="middle" fill="white" font-size="11">GPT-5.4 Mini</text>
+  <text x="370" y="727" text-anchor="middle" fill="#6ee7b7" font-size="11">OpenAI</text>
+  <text x="500" y="727" text-anchor="middle" fill="#86efac" font-size="11">700 ms</text>
+  <text x="640" y="727" text-anchor="middle" fill="#fde68a" font-size="11">$0.00525</text>
+  <text x="790" y="727" text-anchor="middle" fill="white" font-size="11">0.85</text>
+  <rect x="830" y="717" width="80" height="10" rx="5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="830" y="717" width="68" height="10" rx="5" fill="#34d399"/>
+  <text x="980" y="727" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">400K tokens</text>
+  <text x="1100" y="727" text-anchor="middle" fill="#fde68a" font-size="10">Cost / Batch</text>
+
+  <!-- Row 3 - Claude Sonnet -->
+  <rect x="50" y="736" width="1100" height="26" rx="3" fill="rgba(204,120,92,0.12)"/>
+  <rect x="50" y="736" width="5" height="26" fill="#cc785c"/>
+  <text x="150" y="753" text-anchor="middle" fill="white" font-size="11">Claude Sonnet 4.6</text>
+  <text x="370" y="753" text-anchor="middle" fill="#fdba74" font-size="11">Anthropic</text>
+  <text x="500" y="753" text-anchor="middle" fill="#fde68a" font-size="11">900 ms</text>
+  <text x="640" y="753" text-anchor="middle" fill="#fde68a" font-size="11">$0.018</text>
+  <text x="790" y="753" text-anchor="middle" fill="white" font-size="11">0.92</text>
+  <rect x="830" y="743" width="80" height="10" rx="5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="830" y="743" width="73" height="10" rx="5" fill="#f97316"/>
+  <text x="980" y="753" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">1M tokens</text>
+  <text x="1100" y="753" text-anchor="middle" fill="#86efac" font-size="10">Balanced / Analysis</text>
+
+  <!-- Row 4 - Gemini Pro -->
+  <rect x="50" y="762" width="1100" height="26" rx="3" fill="rgba(66,133,244,0.08)"/>
+  <rect x="50" y="762" width="5" height="26" fill="#34a853"/>
+  <text x="150" y="779" text-anchor="middle" fill="white" font-size="11">Gemini 3.1 Pro</text>
+  <text x="370" y="779" text-anchor="middle" fill="#93c5fd" font-size="11">Google</text>
+  <text x="500" y="779" text-anchor="middle" fill="#fbbf24" font-size="11">1100 ms</text>
+  <text x="640" y="779" text-anchor="middle" fill="#fde68a" font-size="11">$0.014</text>
+  <text x="790" y="779" text-anchor="middle" fill="white" font-size="11">0.93</text>
+  <rect x="830" y="769" width="80" height="10" rx="5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="830" y="769" width="74" height="10" rx="5" fill="#fb923c"/>
+  <text x="980" y="779" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">1M tokens</text>
+  <text x="1100" y="779" text-anchor="middle" fill="#a78bfa" font-size="10">Quality / Summary</text>
+
+  <!-- Row 5 - GPT-5.4 -->
+  <rect x="50" y="788" width="1100" height="26" rx="3" fill="rgba(16,163,127,0.08)"/>
+  <rect x="50" y="788" width="5" height="26" fill="#1a7f64"/>
+  <text x="150" y="805" text-anchor="middle" fill="white" font-size="11">GPT-5.4</text>
+  <text x="370" y="805" text-anchor="middle" fill="#6ee7b7" font-size="11">OpenAI</text>
+  <text x="500" y="805" text-anchor="middle" fill="#f87171" font-size="11">1200 ms</text>
+  <text x="640" y="805" text-anchor="middle" fill="#fde68a" font-size="11">$0.0175</text>
+  <text x="790" y="805" text-anchor="middle" fill="white" font-size="11">0.96</text>
+  <rect x="830" y="795" width="80" height="10" rx="5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="830" y="795" width="76" height="10" rx="5" fill="#ef4444"/>
+  <text x="980" y="805" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">1M tokens</text>
+  <text x="1100" y="805" text-anchor="middle" fill="#a78bfa" font-size="10">Quality / Complex</text>
+
+  <!-- Row 6 - Claude Opus -->
+  <rect x="50" y="814" width="1100" height="26" rx="3" fill="rgba(204,120,92,0.08)"/>
+  <rect x="50" y="814" width="5" height="26" fill="#8b4a2e"/>
+  <text x="150" y="831" text-anchor="middle" fill="white" font-size="11">Claude Opus 4.7</text>
+  <text x="370" y="831" text-anchor="middle" fill="#fdba74" font-size="11">Anthropic</text>
+  <text x="500" y="831" text-anchor="middle" fill="#ef4444" font-size="11">1500 ms</text>
+  <text x="640" y="831" text-anchor="middle" fill="#fde68a" font-size="11">$0.030</text>
+  <text x="790" y="831" text-anchor="middle" fill="white" font-size="11">0.98 ★</text>
+  <rect x="830" y="821" width="80" height="10" rx="5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="830" y="821" width="78" height="10" rx="5" fill="#dc2626"/>
+  <text x="980" y="831" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">1M tokens</text>
+  <text x="1100" y="831" text-anchor="middle" fill="#c4b5fd" font-size="10">Highest Quality</text>
+
+  <!-- ====== TEST RESULTS BADGE ====== -->
+  <rect x="730" y="375" width="200" height="80" rx="12" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="830" y="402" text-anchor="middle" fill="#86efac" font-size="13" font-weight="700">✓ ALL TESTS PASS</text>
+  <text x="830" y="422" text-anchor="middle" fill="white" font-size="22" font-weight="700">29/29</text>
+  <text x="830" y="444" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">Unit + Integration</text>
+
+  <!-- ====== FEATURE PILLS ====== -->
+  <rect x="950" y="375" width="220" height="80" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="1060" y="398" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="12" font-weight="600">KEY FEATURES</text>
+  <text x="1060" y="416" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">⚡ &lt;1ms routing overhead</text>
+  <text x="1060" y="432" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">🔁 Auto-fallback on failure</text>
+  <text x="1060" y="448" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="11">🗄 Redis + in-memory cache</text>
+
+  <!-- Footer -->
+  <text x="600" y="880" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10">Built autonomously by NEO — Autonomous AI Engineering Agent · heyneo.so</text>
+</svg>

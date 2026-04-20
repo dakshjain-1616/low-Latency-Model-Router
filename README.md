@@ -8,6 +8,18 @@
 
 Stop hardcoding model names. This router picks the **best LLM for each request automatically** — choosing across OpenRouter's catalogue based on your priority (speed, cost, or quality) in under 1 ms of overhead.
 
+## Architecture & Scoring
+
+### System Architecture & Request Flow
+
+![Architecture](infographic_architecture.svg)
+
+### Model Scoring & Priority Visualization
+
+![Scoring](infographic_scoring.svg)
+
+---
+
 ## Why use this?
 
 When you call an LLM API directly you make two implicit bets: that you picked the right model, and that it stays the right choice tomorrow. In practice:
