@@ -153,11 +153,11 @@ curl -X POST http://localhost:8000/route \
 ```json
 {
   "id": "gen-abc123",
-  "model": "google/gemini-flash-1.5",
+  "model": "google/gemini-3.1-flash-lite-preview",
   "choices": [{"message": {"role": "assistant", "content": "Paris."}}],
   "usage": {"prompt_tokens": 14, "completion_tokens": 3, "total_tokens": 17},
   "routing_decision": {
-    "selected_model": "google/gemini-flash-1.5",
+    "selected_model": "google/gemini-3.1-flash-lite-preview",
     "reason": "Best composite score 0.768 (latency=0.58, cost=0.98, quality=0.80) with priority='balanced'"
   },
   "latency_ms": 312.4,
@@ -287,9 +287,9 @@ routing:
     cost: 0.3
     quality: 0.3
   fallback_models:          # Tried in order when primary fails
-    - "openai/gpt-4o-mini"
-    - "anthropic/claude-3-haiku"
-    - "google/gemini-flash-1.5"
+    - "openai/gpt-5.4-mini"
+    - "google/gemini-3.1-flash-lite-preview"
+    - "anthropic/claude-sonnet-4.6"
 ```
 
 ---

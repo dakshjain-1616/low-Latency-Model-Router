@@ -13,22 +13,22 @@ def test_initial_snapshot():
 
 def test_record_and_snapshot():
     tracker = MetricsTracker()
-    tracker.record("openai/gpt-4o-mini", 100.0)
-    tracker.record("openai/gpt-4o-mini", 200.0)
-    tracker.record("anthropic/claude-3-haiku", 150.0, cached=True)
+    tracker.record("openai/gpt-5.4-mini", 100.0)
+    tracker.record("openai/gpt-5.4-mini", 200.0)
+    tracker.record("anthropic/claude-sonnet-4.6", 150.0, cached=True)
 
     snap = tracker.snapshot()
     assert snap.total_requests == 3
     assert snap.cached_requests == 1
     assert snap.errors_count == 0
     assert snap.avg_latency_ms == pytest.approx(150.0, abs=1)
-    assert "openai/gpt-4o-mini" in snap.model_usage
-    assert snap.model_usage["openai/gpt-4o-mini"] == 2
+    assert "openai/gpt-5.4-mini" in snap.model_usage
+    assert snap.model_usage["openai/gpt-5.4-mini"] == 2
 
 
 def test_error_recording():
     tracker = MetricsTracker()
-    tracker.record("openai/gpt-4o", 50.0, error=True)
+    tracker.record("openai/gpt-5.4", 50.0, error=True)
     snap = tracker.snapshot()
     assert snap.errors_count == 1
 

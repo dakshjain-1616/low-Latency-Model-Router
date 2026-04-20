@@ -8,7 +8,7 @@ from src.api.main import app
 from src.models import RouteResponse
 
 
-def _mock_response(model="openai/gpt-4o-mini") -> RouteResponse:
+def _mock_response(model="openai/gpt-5.4-mini") -> RouteResponse:
     return RouteResponse(
         id="mock-id",
         model=model,
@@ -95,7 +95,7 @@ def test_route_fallback_on_error(MockClient, client):
     mock_instance.chat_completion = AsyncMock(
         side_effect=[
             OpenRouterError("Primary failed", status_code=500, latency_ms=10.0),
-            _mock_response("anthropic/claude-3-haiku"),
+            _mock_response("anthropic/claude-sonnet-4.6"),
         ]
     )
     mock_instance.close = AsyncMock()

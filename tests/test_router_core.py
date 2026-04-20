@@ -77,8 +77,8 @@ def test_fallback_on_missing_preferred():
 
 def test_get_fallback():
     router = ModelRouter()
-    fallback = router.get_fallback("openai/gpt-4o-mini", make_request())
-    assert fallback != "openai/gpt-4o-mini"
+    fallback = router.get_fallback("openai/gpt-5.4-mini", make_request())
+    assert fallback != "openai/gpt-5.4-mini"
     assert fallback in router.models
 
 
